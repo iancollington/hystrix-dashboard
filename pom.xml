@@ -56,7 +56,24 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.15.9</version>
+					<executions>
+						<execution>
+							<id>docker:build</id>
+							<phase>install</phase>
+							<goals>
+								<goal>build</goal>
+								<goal>push</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-
-
 </project>
