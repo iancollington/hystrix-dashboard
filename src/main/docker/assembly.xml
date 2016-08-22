@@ -1,0 +1,12 @@
+<assembly>
+    <id>hystrix-dashboard-docker-maven</id>
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>com.iancollington:hystrix-dashboard</include>
+            </includes>
+            <outputDirectory>/app/dist</outputDirectory>
+            <outputFileNameMapping>hystrix-dashboard.jar</outputFileNameMapping>
+        </dependencySet>
+    </dependencySets>
+</assembly>
