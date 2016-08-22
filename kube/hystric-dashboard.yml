@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hystric-dashboard
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hystric-dashboard
+    spec:
+      containers:
+      - name: hystric-dashboard
+        image: iancollington/bootiful-micro-pizza-hystric-dashboard
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "0.25"
+            memory: 1024Mi
+        env:
+        - name: BOOTIFUL_MICRO_PIZZA_ENV
+          value: prod
+        - name: CONFIG_SERVER
+          value: http://${CONFIG_SERVICE_SERVICE_HOST}:${CONFIG_SERVICE_SERVICE_PORT}/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hystric-dashboard
+  labels:
+    app: hystric-dashboard
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: hystric-dashboard
